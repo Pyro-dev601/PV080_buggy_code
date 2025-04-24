@@ -27,7 +27,21 @@ def print_nametag(format_string, person):
 def fetch_website(urllib_version, url):
     if urllib_version != "3":
         raise ValueError("zle")
-        
+    
+    # Whitelist of allowed domains
+    allowed_domains = ["example.com", "google.com"]
+    
+    # Validate and parse the URL
+    from urllib.parse import urlparse
+    parsed_url = urlparse(url)
+    if not parsed_url.scheme or not parsed_url.netloc:
+        raise ValueError("Invalid URL format")
+    
+    # Check if the domain is in the whitelist
+    domain = parsed_url.netloc.split(':')[0]  # Exclude port if present
+    if domain not in allowed_domains:
+        raise ValueError("Domain not allowed")
+    
     try: 
         with urllib.request.urlopen(url) as response:
             content = response.read()
