@@ -24,15 +24,15 @@ def print_nametag(format_string, person):
 
 
 def fetch_website(urllib_version, url):
-    if urllib_version == "3":
-        import urllib.request as urllib
-    else:
+    if urllib_version != "3":
         raise ValueError("zle")
+        
     try: 
-        http = urllib.PoolManager()
-        r = http.request('GET', url)
-    except:
-        print('Exception')
+        with urllib.request.urlopen(url) as response:
+            content = response.read()
+            print(content.decode("utf-8"))
+    except Exception as e:
+        print("Exception", e)
 
 
 def load_yaml(filename):
