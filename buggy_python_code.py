@@ -24,9 +24,9 @@ def print_nametag(format_string, person):
 
 
 def fetch_website(urllib_version, url):
-     if urlib_version == "2":
+     if urllib_version == "2":
         import urllib2 as urllib
-    elif urlib_version == "3":
+    elif urllib_version == "3":
         import urllib.request as urllib
     else:
         raise ValueError("zle")
